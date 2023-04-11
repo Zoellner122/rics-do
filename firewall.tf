@@ -1,4 +1,4 @@
-resource "digitalocean_firewall" "mx-server(s)" {
+resource "digitalocean_firewall" "mx-server" {
   name        = "Firewall - MX machines (mailcow based)"
   droplet_ids = [digitalocean_droplet.teemo.id]
 
