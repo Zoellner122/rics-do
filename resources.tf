@@ -23,7 +23,7 @@ resource "digitalocean_droplet" "teemo" {
     digitalocean_ssh_key.rick-tempest
   ]
 
-  image = "ubuntu-22-04-x64"
-  size  = "s-1vcpu-2gb"
-
+  image         = "ubuntu-22-04-x64"
+  size          = "s-1vcpu-2gb"
+  droplet_agent = true
 }
