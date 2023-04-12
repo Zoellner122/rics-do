@@ -79,8 +79,8 @@ resource "digitalocean_record" "teemo_autodiscover" {
     digitalocean_domain.ri-cs,
     digitalocean_droplet.teemo
   ]
-  type = "CNAME"
-  name = "autodiscover"
+  type  = "CNAME"
+  name  = "autodiscover"
   value = "mail.ri-cs.nl."
 }
 
@@ -90,7 +90,7 @@ resource "digitalocean_record" "teemo_autoconfig" {
     digitalocean_domain.ri-cs,
     digitalocean_droplet.teemo
   ]
-  type = "CNAME"
-  name = "autoconfig"
+  type  = "CNAME"
+  name  = "autoconfig"
   value = "mail.ri-cs.nl."
 }

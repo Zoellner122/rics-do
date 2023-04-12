@@ -24,7 +24,7 @@ resource "digitalocean_project" "ri-cs" {
 
 resource "digitalocean_vpc" "ri-cs" {
   name   = "ri-cs"
-  region = "ams3"
+  region = var.do_region
 
   ip_range = "10.100.0.0/20"
 }

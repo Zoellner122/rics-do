@@ -17,7 +17,7 @@ resource "digitalocean_droplet" "teemo" {
   vpc_uuid = digitalocean_vpc.ri-cs.id
   ssh_keys = [digitalocean_ssh_key.rick-tempest.id, digitalocean_ssh_key.rick-normandy.id]
   ipv6     = true
-  region   = "ams3"
+  region   = var.do_region
   depends_on = [
     digitalocean_vpc.ri-cs,
     digitalocean_ssh_key.rick-tempest
@@ -30,5 +30,5 @@ resource "digitalocean_droplet" "teemo" {
 
 resource "digitalocean_reserved_ip" "teemo-ip" {
   droplet_id = digitalocean_droplet.teemo.id
-  region = "ams3"
+  region     = "ams3"
 }

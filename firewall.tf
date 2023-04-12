@@ -141,7 +141,7 @@ resource "digitalocean_firewall" "mx-server" {
 
 resource "digitalocean_firewall" "default" {
   droplet_ids = [digitalocean_droplet.teemo.id]
-  name = "default"
+  name        = "default"
   outbound_rule {
     protocol              = "tcp"
     port_range            = "53"
