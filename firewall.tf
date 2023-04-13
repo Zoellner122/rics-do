@@ -1,6 +1,6 @@
 resource "digitalocean_firewall" "mx-server" {
-  name        = "mxserver-firewall"
-  droplet_ids = [digitalocean_droplet.teemo.id]
+  name = "mxserver-firewall"
+  #droplet_ids = [digitalocean_droplet.teemo.id]
 
   # Temporary SSH rules (remove when teleport is implemented)
   inbound_rule {
@@ -140,8 +140,8 @@ resource "digitalocean_firewall" "mx-server" {
 }
 
 resource "digitalocean_firewall" "default" {
-  droplet_ids = [digitalocean_droplet.teemo.id]
-  name        = "default"
+  #droplet_ids = [digitalocean_droplet.teemo.id]
+  name = "default"
   outbound_rule {
     protocol              = "tcp"
     port_range            = "53"
