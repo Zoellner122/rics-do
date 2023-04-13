@@ -25,7 +25,7 @@ resource "digitalocean_record" "teemo_a" {
     digitalocean_droplet.teemo
   ]
   type  = "A"
-  name  = digitalocean_droplet.teemo.name
+  name  = "mail"
   value = digitalocean_droplet.teemo.ipv4_address
 }
 
@@ -36,8 +36,8 @@ resource "digitalocean_record" "teemo_cname" {
     digitalocean_droplet.teemo
   ]
   type  = "CNAME"
-  name  = "mail"
-  value = "teemo.ri-cs.nl."
+  name  = "teemo"
+  value = "mail.ri-cs.nl."
 }
 
 resource "digitalocean_record" "teemo_aaaa" {
@@ -47,7 +47,7 @@ resource "digitalocean_record" "teemo_aaaa" {
     digitalocean_droplet.teemo
   ]
   type  = "AAAA"
-  name  = digitalocean_droplet.teemo.name
+  name  = "mail"
   value = digitalocean_droplet.teemo.ipv6_address
 }
 
@@ -69,12 +69,12 @@ resource "digitalocean_record" "teemo_dmarc" {
     digitalocean_droplet.teemo
   ]
   type  = "TXT"
-  name  = "@"
+  name  = "_dmarc"
   value = "v=DMARC1;p=reject;sp=reject;pct=100;rua=mailto:webmaster@ri-cs.nl;ruf=mailto:webmaster@ri-cs.nl;ri=86400;aspf=s;adkim=s;fo=1"
 }
 
 resource "digitalocean_record" "teemo_autodiscover" {
-  domain = digitalocean_domain.ri-cs
+  domain = digitalocean_domain.ri-cs.id
   depends_on = [
     digitalocean_domain.ri-cs,
     digitalocean_droplet.teemo
@@ -85,7 +85,7 @@ resource "digitalocean_record" "teemo_autodiscover" {
 }
 
 resource "digitalocean_record" "teemo_autoconfig" {
-  domain = digitalocean_domain.ri-cs
+  domain = digitalocean_domain.ri-cs.id
   depends_on = [
     digitalocean_domain.ri-cs,
     digitalocean_droplet.teemo
@@ -93,4 +93,37 @@ resource "digitalocean_record" "teemo_autoconfig" {
   type  = "CNAME"
   name  = "autoconfig"
   value = "mail.ri-cs.nl."
+}
+
+resource "digitalocean_record" "teemo_dkim" {
+  domain = digitalocean_domain.ri-cs.id
+  depends_on = [
+    digitalocean_domain.ri-cs,
+    digitalocean_droplet.teemo
+  ]
+  type  = "TXT"
+  name  = "dkim._domainkey"
+  value = "v=DKIM1;k=rsa;t=s;s=email;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwReYerwXjABdaqKyebYhD/xsTz0yWV51qQI+zgogLf6hjYQ1rWSMcxWilAhAqGGQtmtpvoyXWL21MojQO73e/PFGtLvuCEYZYVgAAKpUB8qDcb0TqEnAPiT/0tgtMR40qQMFp6D+vgKoi93asuYw4fsQuNd0CsoB4mJEE9sKSp8mUgKtCeOZ0qhQJRdXnedBQC92cAHQw+zuYM42O7jjMCsJN7ld0NrSslWtscEZWbg+T4EtC+sE9l38THyv60j7s7cvnWXClUXfutk0PQ5Yje+Au30ry9scyQFC7wH9Z1j9shFwMISVVurPhJrwKtcpefNloAyYLlBQAWbsySPdEwIDAQAB"
+}
+
+resource "digitalocean_record" "braum_a" {
+  domain = digitalocean_domain.ri-cs.id
+  depends_on = [
+    digitalocean_domain.ri-cs,
+    digitalocean_droplet.teemo
+  ]
+  type = "A"
+  name = digitalocean_droplet.braum.name
+  value = digitalocean_droplet.braum.ipv4_address
+}
+
+resource "digitalocean_record" "braum_aaaa" {
+  domain = digitalocean_domain.ri-cs.id
+  depends_on = [
+    digitalocean_domain.ri-cs,
+    digitalocean_droplet.teemo
+  ]
+  type = "AAAA"
+  name = digitalocean_droplet.braum.name
+  value = digitalocean_droplet.braum.ipv6_address
 }
