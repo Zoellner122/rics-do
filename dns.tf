@@ -110,10 +110,10 @@ resource "digitalocean_record" "braum_a" {
   domain = digitalocean_domain.ri-cs.id
   depends_on = [
     digitalocean_domain.ri-cs,
-    digitalocean_droplet.teemo
+    digitalocean_droplet.braum
   ]
-  type = "A"
-  name = digitalocean_droplet.braum.name
+  type  = "A"
+  name  = digitalocean_droplet.braum.name
   value = digitalocean_droplet.braum.ipv4_address
 }
 
@@ -121,9 +121,31 @@ resource "digitalocean_record" "braum_aaaa" {
   domain = digitalocean_domain.ri-cs.id
   depends_on = [
     digitalocean_domain.ri-cs,
-    digitalocean_droplet.teemo
+    digitalocean_droplet.braum
   ]
-  type = "AAAA"
-  name = digitalocean_droplet.braum.name
+  type  = "AAAA"
+  name  = digitalocean_droplet.braum.name
   value = digitalocean_droplet.braum.ipv6_address
+}
+
+resource "digitalocean_record" "lulu_a" {
+  domain = digitalocean_domain.ri-cs.id
+  depends_on = [
+    digitalocean_domain.ri-cs,
+    digitalocean_droplet.lulu
+  ]
+  type  = "A"
+  name  = digitalocean_droplet.lulu.name
+  value = digitalocean_droplet.lulu.ipv4_address
+}
+
+resource "digitalocean_record" "lulu_aaaa" {
+  domain = digitalocean_domain.ri-cs.id
+  depends_on = [
+    digitalocean_domain.ri-cs,
+    digitalocean_droplet.lulu
+  ]
+  type  = "AAAA"
+  name  = digitalocean_droplet.lulu.name
+  value = digitalocean_droplet.lulu.ipv6_address
 }
